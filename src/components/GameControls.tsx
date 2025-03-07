@@ -21,7 +21,7 @@ const GameControls: React.FC<GameControlsProps> = ({
       <div className="flex flex-wrap justify-between items-center mb-4">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Periodic Table Game</h2>
-          <p className="text-gray-600">Test your knowledge of element positions!</p>
+          <p className="text-gray-600">Find where this element symbol is located by Dielldev</p>
         </div>
         
         <div className="flex items-center space-x-4">
@@ -60,16 +60,16 @@ const GameControls: React.FC<GameControlsProps> = ({
       
       {currentElement ? (
         <div className="mb-4 p-4 bg-gray-100 rounded">
-          <h3 className="text-xl font-bold">{gameOver ? 'Game Over!' : 'Find This Element:'}</h3>
-          <div className="text-2xl font-bold text-indigo-600">{currentElement.name}</div>
+          <h3 className="text-xl font-bold">{gameOver ? 'Game Over!' : 'Find This Symbol:'}</h3>
+          <div className="text-2xl font-bold text-indigo-600">{currentElement.symbol}</div>
           
           {gameOver && (
             <div className="mt-2">
               {guessedCorrectly ? (
-                <div className="text-green-600 font-semibold">Correct! You found {currentElement.symbol}.</div>
+                <div className="text-green-600 font-semibold">Correct! You found {currentElement.name}!</div>
               ) : (
                 <div className="text-red-600 font-semibold">
-                  You didn't find it. The element was {currentElement.symbol} at position ({currentElement.row}, {currentElement.column}).
+                  You didn't find it. The element was {currentElement.name} at position ({currentElement.row}, {currentElement.column}).
                 </div>
               )}
             </div>

@@ -36,13 +36,12 @@ const ElementCell: React.FC<ElementCellProps> = ({
   
   return (
     <div className={cellClasses} onClick={onClick}>
-      {isRevealed ? (
+      <div className="text-[8px]">{element.atomicNumber}</div>
+      {(isRevealed || isCorrect) && (
         <>
-          <div className="font-bold">{element.symbol}</div>
-          <div className="text-xs">{element.atomicNumber}</div>
+          <div className="font-bold text-sm">{element.symbol}</div>
+          <div className="text-[8px] leading-tight mt-0.5">{element.name}</div>
         </>
-      ) : (
-        <div className="text-xs">{element.atomicNumber}</div>
       )}
     </div>
   );
