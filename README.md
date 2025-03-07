@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+# Periodic Table Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive educational game built with React and TypeScript to help students learn the positions of elements in the periodic table.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Interactive periodic table with color-coded element categories
+- Three difficulty levels:
+  - Easy (5 attempts)
+  - Medium (3 attempts)
+  - Hard (1 attempt)
+- Score tracking system
+- Color-coded element categories for better visualization
+- Responsive design that works on both desktop and mobile devices
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js (version 14 or higher)
+- npm (Node Package Manager)
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+3. Start the development server:
+```bash
+npm start
+```
 
-### `npm run build`
+The application will open in your default browser at [http://localhost:3000](http://localhost:3000).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to Play
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Select your desired difficulty level (Easy, Medium, or Hard)
+2. Click "Generate Element" to start the game
+3. Find and click the correct position of the given element in the periodic table
+4. You have a limited number of attempts based on the difficulty level
+5. Score points based on:
+   - Number of remaining attempts
+   - Difficulty level selected
+   - Successful identification of elements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Element Categories
 
-### `npm run eject`
+The periodic table is color-coded by element categories:
+- Alkali Metals
+- Alkaline Earth Metals
+- Transition Metals
+- Post-Transition Metals
+- Metalloids
+- Nonmetals
+- Halogens
+- Noble Gases
+- Lanthanides
+- Actinides
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Technologies Used
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- React 19
+- TypeScript
+- Tailwind CSS
+- Jest and React Testing Library (for testing)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Development
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This project was bootstrapped with Create React App and uses TypeScript for type safety. The codebase is structured as follows:
 
-## Learn More
+```
+src/
+  ├── components/     # React components
+  ├── data/          # Element data and utilities
+  ├── types/         # TypeScript type definitions
+  └── App.tsx        # Main application component
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `npm start` - Run the development server
+- `npm test` - Run tests
+- `npm run build` - Create production build
+- `npm run eject` - Eject from Create React App
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues and pull requests.
+
+## Author
+
+Diell Govori
+
+## License
+
+This project is open source and available under the MIT License.
