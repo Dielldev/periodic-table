@@ -68,7 +68,7 @@ export const elements: Element[] = [
   // Row 6
   { symbol: 'Cs', name: 'Cesium', atomicNumber: 55, row: 6, column: 1, category: ElementCategory.AlkaliMetal },
   { symbol: 'Ba', name: 'Barium', atomicNumber: 56, row: 6, column: 2, category: ElementCategory.AlkalineEarthMetal },
-  { symbol: 'La', name: 'Lanthanum', atomicNumber: 57, row: 6, column: 3, category: ElementCategory.Lanthanide },
+  { symbol: 'La', name: 'Lanthanum', atomicNumber: 57, row: 8, column: 3, category: ElementCategory.Lanthanide },
   { symbol: 'Hf', name: 'Hafnium', atomicNumber: 72, row: 6, column: 4, category: ElementCategory.TransitionMetal },
   { symbol: 'Ta', name: 'Tantalum', atomicNumber: 73, row: 6, column: 5, category: ElementCategory.TransitionMetal },
   { symbol: 'W', name: 'Tungsten', atomicNumber: 74, row: 6, column: 6, category: ElementCategory.TransitionMetal },
@@ -88,7 +88,7 @@ export const elements: Element[] = [
   // Row 7
   { symbol: 'Fr', name: 'Francium', atomicNumber: 87, row: 7, column: 1, category: ElementCategory.AlkaliMetal },
   { symbol: 'Ra', name: 'Radium', atomicNumber: 88, row: 7, column: 2, category: ElementCategory.AlkalineEarthMetal },
-  { symbol: 'Ac', name: 'Actinium', atomicNumber: 89, row: 7, column: 3, category: ElementCategory.Actinide },
+  { symbol: 'Ac', name: 'Actinium', atomicNumber: 89, row: 9, column: 3, category: ElementCategory.Actinide },
   { symbol: 'Rf', name: 'Rutherfordium', atomicNumber: 104, row: 7, column: 4, category: ElementCategory.TransitionMetal },
   { symbol: 'Db', name: 'Dubnium', atomicNumber: 105, row: 7, column: 5, category: ElementCategory.TransitionMetal },
   { symbol: 'Sg', name: 'Seaborgium', atomicNumber: 106, row: 7, column: 6, category: ElementCategory.TransitionMetal },

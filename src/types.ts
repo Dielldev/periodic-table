@@ -21,6 +21,11 @@ export enum ElementCategory {
   Unknown = 'unknown'
 }
 
+export enum GameMode {
+  Standard = 'standard',
+  Collection = 'collection'
+}
+
 export interface GameState {
   currentElement: Element | null;
   attempts: number;
@@ -30,4 +35,8 @@ export interface GameState {
   guessedPositions: Array<{row: number, column: number}>;
   score: number;
   difficulty: 'easy' | 'medium' | 'hard';
+  gameMode: GameMode;
+  collectedElements: Element[];
+  remainingElements: Element[];
+  gameCompleted: boolean;
 }

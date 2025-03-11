@@ -22,7 +22,7 @@ const ElementCell: React.FC<ElementCellProps> = ({
   }
 
   // Determine cell styling based on game state
-  let cellClasses = "w-16 h-16 border flex flex-col items-center justify-center text-center transition-all duration-300 cursor-pointer hover:opacity-80";
+  let cellClasses = "w-16 h-16 border flex flex-col items-center border-black  justify-center text-center transition-all duration-300 cursor-pointer hover:opacity-80";
   
   if (isRevealed) {
     cellClasses += ` ${getCategoryColor(element.category)}`;
@@ -36,7 +36,7 @@ const ElementCell: React.FC<ElementCellProps> = ({
   
   return (
     <div className={cellClasses} onClick={onClick}>
-      <div className="text-[8px]">{element.atomicNumber}</div>
+    
       {(isRevealed || isCorrect) && (
         <>
           <div className="font-bold text-sm">{element.symbol}</div>

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PeriodicTable from './components/PeriodicTable';
 import GameControls from './components/GameControls';
 import ElementLegend from './components/ElementLegend';
-import { GameState } from './types';
-import { getRandomElement } from './data/elements';
+import { GameState, GameMode, Element } from './types';
+import { getRandomElement, elements } from './data/elements';
 
 function App() {
   const [gameState, setGameState] = useState<GameState>({
@@ -14,15 +14,45 @@ function App() {
     guessedCorrectly: false,
     guessedPositions: [],
     score: 0,
-    difficulty: 'medium'
+    difficulty: 'medium',
+    gameMode: GameMode.Standard,
+    collectedElements: [],
+    remainingElements: [...elements],
+    gameCompleted: false
   });
 
   // Generate a random element for the game
   const handleGenerateElement = () => {
-    const element = getRandomElement();
+    if (gameState.gameCompleted) {
+      return;
+    }
+    
+    let nextElement: Element | null = null;
+    
+    // Different element selection strategy based on game mode
+    if (gameState.gameMode === GameMode.Standard || !gameState.currentElement) {
+      // Standard mode: random element each time
+      nextElement = getRandomElement();
+    } else if (gameState.gameMode === GameMode.Collection) {
+      // Collection mode: select from remaining elements
+      if (gameState.remainingElements.length === 0) {
+        // No more elements, game is complete
+        setGameState({
+          ...gameState,
+          gameCompleted: true,
+          gameOver: true
+        });
+        return;
+      }
+      
+      // Select a random element from the remaining elements
+      const randomIndex = Math.floor(Math.random() * gameState.remainingElements.length);
+      nextElement = gameState.remainingElements[randomIndex];
+    }
+
     setGameState({
       ...gameState,
-      currentElement: element,
+      currentElement: nextElement,
       attempts: 0,
       gameOver: false,
       guessedCorrectly: false,
@@ -40,7 +70,11 @@ function App() {
       guessedCorrectly: false,
       guessedPositions: [],
       score: 0,
-      difficulty: gameState.difficulty
+      difficulty: gameState.difficulty,
+      gameMode: gameState.gameMode,
+      collectedElements: [],
+      remainingElements: [...elements],
+      gameCompleted: false
     });
   };
 
@@ -63,13 +97,26 @@ function App() {
     // Update game state based on the guess
     if (isCorrect) {
       // Correct guess
+      let newCollectedElements = [...gameState.collectedElements];
+      let newRemainingElements = [...gameState.remainingElements];
+      
+      // In collection mode, update collected and remaining elements
+      if (gameState.gameMode === GameMode.Collection && gameState.currentElement) {
+        newCollectedElements.push(gameState.currentElement);
+        newRemainingElements = newRemainingElements.filter(
+          el => el.atomicNumber !== gameState.currentElement!.atomicNumber
+        );
+      }
+      
       setGameState({
         ...gameState,
         attempts: newAttempts,
         gameOver: true,
         guessedCorrectly: true,
         guessedPositions: newGuessedPositions,
-        score: gameState.score + calculateScore()
+        score: gameState.score + calculateScore(),
+        collectedElements: newCollectedElements,
+        remainingElements: newRemainingElements
       });
     } else if (newAttempts >= gameState.maxAttempts) {
       // Out of attempts
@@ -95,15 +142,18 @@ function App() {
     const baseScore = 100;
     const attemptMultiplier = gameState.maxAttempts - gameState.attempts + 1;
     
+    // Score boost for collection mode
+    const modeMultiplier = gameState.gameMode === GameMode.Collection ? 1.2 : 1;
+    
     switch (gameState.difficulty) {
       case 'easy':
-        return baseScore * attemptMultiplier * 0.6;
+        return Math.round(baseScore * attemptMultiplier * 0.6 * modeMultiplier);
       case 'medium':
-        return baseScore * attemptMultiplier;
+        return Math.round(baseScore * attemptMultiplier * modeMultiplier);
       case 'hard':
-        return baseScore * attemptMultiplier * 2;
+        return Math.round(baseScore * attemptMultiplier * 2 * modeMultiplier);
       default:
-        return baseScore * attemptMultiplier;
+        return Math.round(baseScore * attemptMultiplier * modeMultiplier);
     }
   };
 
@@ -118,6 +168,20 @@ function App() {
     });
   };
   
+  // Change game mode
+  const handleChangeGameMode = (mode: GameMode) => {
+    setGameState({
+      ...gameState,
+      gameMode: mode,
+      collectedElements: [],
+      remainingElements: [...elements],
+      gameCompleted: false,
+      currentElement: null,
+      gameOver: false,
+      score: 0
+    });
+  };
+  
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-6xl mx-auto">
@@ -126,6 +190,7 @@ function App() {
           onGenerateElement={handleGenerateElement} 
           onReset={handleReset}
           onChangeDifficulty={handleChangeDifficulty}
+          onChangeGameMode={handleChangeGameMode}
         />
         
         <PeriodicTable 
